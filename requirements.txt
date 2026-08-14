@@ -1,0 +1,20 @@
+# Core ML
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Federated Learning
+flwr==1.7.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.23.0
+scikit-learn>=1.2.0
+
+# TinyML / Model Export (Using tensorflow for TFLite conversion)
+tensorflow-cpu>=2.14.0
+# optional: ai-edge-torch for direct PyTorch -> TFLite conversion
+# ai-edge-torch
+
+# Utility
+tqdm
+matplotlib
