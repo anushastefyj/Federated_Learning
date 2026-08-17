@@ -173,23 +173,24 @@ if __name__ == "__main__":
     sample_data_dir = "sample_data"
     sample_out_dir = "processed_data"
     
-    if not os.path.exists(sample_data_dir):
-        os.makedirs(sample_data_dir)
+    if not os.path.exists(sample_data_dir) or len(glob.glob(os.path.join(sample_data_dir, "*.csv"))) < 3:
+        os.makedirs(sample_data_dir, exist_ok=True)
         print(f"Creating sample dummy data in {sample_data_dir}/ for testing...")
-        dates = pd.date_range(start='2023-01-01', end='2023-01-31', freq='h') # 'h' is deprecated in pandas > 2.2, using 'h' or 'H'
-        df = pd.DataFrame({
-            'timestamp': dates, 
-            'PM2.5': np.random.uniform(10, 200, len(dates)), 
-            'temperature': np.random.uniform(15, 35, len(dates))
-        })
-        # Introduce a small gap (interpolate)
-        df.loc[10:12, 'PM2.5'] = np.nan 
-        # Introduce a large gap (drop)
-        df.loc[100:110, 'PM2.5'] = np.nan 
-        df.to_csv(os.path.join(sample_data_dir, "station_1.csv"), index=False)
+        dates = pd.date_range(start='2023-01-01', end='2023-01-31', freq='h')
+        for i in range(1, 4):
+            df = pd.DataFrame({
+                'timestamp': dates, 
+                'PM2.5': np.random.uniform(10, 200, len(dates)), 
+                'temperature': np.random.uniform(15, 35, len(dates))
+            })
+            # Introduce a small gap (interpolate)
+            df.loc[10:12, 'PM2.5'] = np.nan 
+            # Introduce a large gap (drop)
+            df.loc[100:110, 'PM2.5'] = np.nan 
+            df.to_csv(os.path.join(sample_data_dir, f"station_{i}.csv"), index=False)
         
     sample_config = {
-        "station_1": {"city": "Delhi", "regime": "traffic"}
+        f"station_{i}": {"city": "Delhi", "regime": "traffic"} for i in range(1, 4)
     }
     
     print("Running data_loader.py...")

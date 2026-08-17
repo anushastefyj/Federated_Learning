@@ -25,7 +25,6 @@ def export_to_tflite(pytorch_model, input_shape, save_dir, model_name="tinyml_mo
         dummy_input, 
         onnx_path,
         export_params=True,
-        opset_version=11,
         do_constant_folding=True,
         input_names=['input'],
         output_names=['output'],

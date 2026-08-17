@@ -4,5 +4,17 @@
         "regime": "traffic",
         "station_id": "station_1",
         "num_samples": 686
+    },
+    {
+        "city": "Delhi",
+        "regime": "traffic",
+        "station_id": "station_2",
+        "num_samples": 686
+    },
+    {
+        "city": "Delhi",
+        "regime": "traffic",
+        "station_id": "station_3",
+        "num_samples": 686
     }
 ]
